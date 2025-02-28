@@ -95,19 +95,29 @@ function App() {
         <button onClick={() => setFilter('completed')}>Completed</button>
         <button onClick={() => setFilter('incomplete')}>Incomplete</button>
       </div>
-      <ul>
+      <div className="task-list">
         {filteredTasks.map((task) => (
-          <li key={task.id} className={task.completed ? 'completed' : ''}>
+          <div key={task.id} className={`task-card ${task.completed ? 'completed' : ''}`}>
             <h3>{task.title}</h3>
             <p>{task.description}</p>
-            <p>Due: {new Date(task.dueDate).toLocaleDateString()}</p>
-            <button onClick={() => toggleTaskCompletion(task.id)}>
-              {task.completed ? 'Undo' : 'Complete'}
-            </button>
-            <button onClick={() => deleteTask(task.id)}>Delete</button>
-          </li>
+            <p className="due-date">Due: {new Date(task.dueDate).toLocaleDateString()}</p>
+            <div className="actions">
+              <button
+                className="complete-btn"
+                onClick={() => toggleTaskCompletion(task.id)}
+              >
+                {task.completed ? 'Undo' : 'Complete'}
+              </button>
+              <button
+                className="delete-btn"
+                onClick={() => deleteTask(task.id)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
